@@ -150,6 +150,7 @@ static GLFWbool parseMapping(_GLFWmapping* mapping, const char* string)
         { "dpright",       mapping->buttons + GLFW_GAMEPAD_BUTTON_DPAD_RIGHT },
         { "dpdown",        mapping->buttons + GLFW_GAMEPAD_BUTTON_DPAD_DOWN },
         { "dpleft",        mapping->buttons + GLFW_GAMEPAD_BUTTON_DPAD_LEFT },
+        { "shared",        mapping->buttons + GLFW_GAMEPAD_BUTTON_SHARED},
         { "lefttrigger",   mapping->axes + GLFW_GAMEPAD_AXIS_LEFT_TRIGGER },
         { "righttrigger",  mapping->axes + GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER },
         { "leftx",         mapping->axes + GLFW_GAMEPAD_AXIS_LEFT_X },

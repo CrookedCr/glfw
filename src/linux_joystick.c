@@ -52,7 +52,7 @@
 static void handleKeyEvent(_GLFWjoystick* js, int code, int value)
 {
     _glfwInputJoystickButton(js,
-                             js->linjs.keyMap[code - BTN_MISC],
+                             js->linjs.keyMap[code],
                              value ? GLFW_PRESS : GLFW_RELEASE);
 }
 
@@ -240,9 +240,12 @@ static GLFWbool openJoystickDevice(const char* path)
         if (!isBitSet(code, keyBits))
             continue;
 
-        linjs.keyMap[code - BTN_MISC] = buttonCount;
+        linjs.keyMap[code] = buttonCount;
         buttonCount++;
     }
+    
+    linjs.keyMap[KEY_RECORD] = buttonCount;
+    ++buttonCount;
 
     for (int code = 0;  code < ABS_CNT;  code++)
     {

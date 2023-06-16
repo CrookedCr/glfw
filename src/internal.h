@@ -627,7 +627,7 @@ struct _GLFWmapping
 {
     char            name[128];
     char            guid[33];
-    _GLFWmapelement buttons[15];
+    _GLFWmapelement buttons[16];
     _GLFWmapelement axes[6];
 };
 
