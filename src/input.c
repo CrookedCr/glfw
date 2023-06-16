@@ -1395,6 +1395,7 @@ GLFWAPI GLFWbool glfwSetGamepadName(int jid, const char * new_name)
     if (!_glfw.platform.pollJoystick(js, _GLFW_POLL_PRESENCE))
         return GLFW_FALSE;
     
+    memset(js->name, 0, 128);
     strncpy(js->name, new_name, length);
     return GLFW_TRUE;
 }
