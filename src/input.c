@@ -34,6 +34,7 @@
 #include <float.h>
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
 // Internal key state used for sticky keys
@@ -527,6 +528,7 @@ _GLFWjoystick* _glfwAllocJoystick(const char* name,
     js->buttonCount = buttonCount;
     js->hatCount    = hatCount;
 
+    
     strncpy(js->name, name, sizeof(js->name) - 1);
     strncpy(js->guid, guid, sizeof(js->guid) - 1);
     js->mapping = findValidMapping(js);
@@ -1364,6 +1366,37 @@ GLFWAPI const char* glfwGetGamepadName(int jid)
         return NULL;
 
     return js->mapping->name;
+}
+
+GLFWAPI GLFWbool glfwSetGamepadName(int jid, const char * new_name)
+{
+    _GLFWjoystick* js;
+    int length = strlen(new_name);
+
+    assert(jid >= GLFW_JOYSTICK_1);
+    assert(jid <= GLFW_JOYSTICK_LAST);
+    assert(length <= 128);
+
+    _GLFW_REQUIRE_INIT_OR_RETURN(GLFW_FALSE);
+
+    if (jid < 0 || jid > GLFW_JOYSTICK_LAST)
+    {
+        _glfwInputError(GLFW_INVALID_ENUM, "Invalid joystick ID %i", jid);
+        return GLFW_FALSE;
+    }
+
+    if (!initJoysticks())
+        return GLFW_FALSE;
+
+    js = _glfw.joysticks + jid;
+    if (!js->connected)
+        return GLFW_FALSE;
+
+    if (!_glfw.platform.pollJoystick(js, _GLFW_POLL_PRESENCE))
+        return GLFW_FALSE;
+    
+    strncpy(js->name, new_name, length);
+    return GLFW_TRUE;
 }
 
 GLFWAPI int glfwGetGamepadState(int jid, GLFWgamepadstate* state)
