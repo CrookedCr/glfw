@@ -244,8 +244,11 @@ static GLFWbool openJoystickDevice(const char* path)
         buttonCount++;
     }
     
+    if(isBitSet(KEY_RECORD, keyBits))
+    {
     linjs.keyMap[KEY_RECORD] = buttonCount;
     ++buttonCount;
+    }
 
     for (int code = 0;  code < ABS_CNT;  code++)
     {
