@@ -1368,10 +1368,10 @@ GLFWAPI const char* glfwGetGamepadName(int jid)
     return js->mapping->name;
 }
 
-GLFWAPI GLFWbool glfwSetGamepadName(int jid, const char * new_name)
+GLFWAPI GLFWbool glfwSetJoystickName(int jid, const char * name)
 {
     _GLFWjoystick* js;
-    int length = strlen(new_name);
+    int length = strlen(name);
 
     assert(jid >= GLFW_JOYSTICK_1);
     assert(jid <= GLFW_JOYSTICK_LAST);
@@ -1396,7 +1396,7 @@ GLFWAPI GLFWbool glfwSetGamepadName(int jid, const char * new_name)
         return GLFW_FALSE;
     
     memset(js->name, 0, 128);
-    strncpy(js->name, new_name, length);
+    strncpy(js->name, name, length);
     return GLFW_TRUE;
 }
 

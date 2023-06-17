@@ -23,12 +23,9 @@ extern "C" {
  *
  *  @thread_safety This function must only be called from the main thread.
  *
- *  @sa @ref gamepad
- *  @sa @ref glfwJoystickIsGamepad
- *
  *  @ingroup input
  */
-GLFWAPI int glfwSetGamepadName(int jid, const char * new_name);
+GLFWAPI int glfwSetJoystickName(int jid, const char * name);
 
 #ifdef __cplusplus
 }
